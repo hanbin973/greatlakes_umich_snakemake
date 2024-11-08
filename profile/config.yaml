@@ -1,0 +1,27 @@
+# Simple setupfile : https://github.com/jdblischak/smk-simple-slurm/tree/main
+# Executor plugin : https://github.com/snakemake/snakemake-executor-plugin-cluster-generic
+executor: cluster-generic # executor plugin should be installed first
+cluster-generic-submit-cmd:
+  mkdir -p logs/{rule} &&
+  sbatch # put slurm options below
+    --job-name=smk-{rule}-{wildcards}
+    --mail-user=hblee@umich.edu # umich email
+    --mail-type=BEGIN,END # copy-and-paste from greatlakes doc
+    --partition={resources.partition} # partition name - same as ondemand
+    --account={resources.account} # jonathan's account, see below - same as ondemand
+    --output=logs/{rule}/{rule}-{wildcards}-%j.out
+    --error=logs/{rule}/{rule}-{wildcards}-.%j.err
+    --nodes={resources.nodes} 
+    --gpus={resources.gpus}
+    --cpus-per-task={resources.num_threads}
+default-resources: # resource variables
+  - partition=spgpu
+  - account=jonth0
+  - nodes=1 # number of nodes, 1 unless super massive job
+  - mem=20g # amount of memory 10g, 10m, 10k, etc.
+  - gpus=1 # amount of gpus requested
+  - num_threads=4 # number of threads
+jobs: 1 # number of jobs submitted to the cluster
+use-conda: True # not 100% sure, but it uses the same environment that executed snakemake
+latency-wait: 60 # transferring files may take some time
+
