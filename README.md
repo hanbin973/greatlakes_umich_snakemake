@@ -24,5 +24,5 @@ In mamba,
 mamba install -c bioconda snakemake-executor-plugin-cluster-generic
 ```
 ## Simple slurm
-- [`smk-simple-slurm`] (https://github.com/jdblischak/smk-simple-slurm?tab=readme-ov-file)
+- `smk-simple-slurm` [repository](https://github.com/jdblischak/smk-simple-slurm?tab=readme-ov-file)
 - [SLURM sbatch documentaion](https://slurm.schedmd.com/sbatch.html)
