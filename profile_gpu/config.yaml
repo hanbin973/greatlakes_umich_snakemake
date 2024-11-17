@@ -1,0 +1,28 @@
+executor: cluster-generic
+cluster-generic-submit-cmd:
+  mkdir -p logs/{rule} &&
+  sbatch 
+    --job-name=smk-{rule}-{wildcards}
+    --mail-user=hblee@umich.edu 
+    --mail-type=BEGIN,END 
+    --partition={resources.partition} 
+    --account={resources.account} 
+    --output=logs/{rule}/{rule}-{wildcards}-%j.out
+    --error=logs/{rule}/{rule}-{wildcards}-.%j.err
+    --nodes={resources.nodes} 
+    --gpus={resources.gpus}
+    --cpus-per-task={resources.num_threads}
+    --mem={resources.mem}
+    --time={resources.time_limit}
+default-resources: 
+  - partition=spgpu
+  - account=jonth0
+  - nodes=1 
+  - mem=20g 
+  - gpus=1 
+  - num_threads=4 
+  - time_limit=01-00:00:01
+jobs: 20
+use-conda: True 
+latency-wait: 60
+printshellcmds: True
