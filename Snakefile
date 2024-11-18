@@ -47,7 +47,7 @@ rule two_dim_wildcard_reduce:
 		out_path = two_dim_reduce_pattern
 	script:
 		"2d_wildcard_reduce.py"
-	groups:
+	group:
 		"reduce"
 
 rule two_dim_wildcard:
@@ -58,7 +58,7 @@ rule two_dim_wildcard:
 		wc2 = "{wc2}"
 	script:
 		"2d_wildcard.py"
-	groups:
+	group:
 		"reduce"
 
 
