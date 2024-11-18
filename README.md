@@ -2,7 +2,7 @@
 
 ## Dependencices
 Snakemake is a workflow management tool.
-It can be install by pip
+Youn can install by pip
 ```
 pip install snakemake
 ```
